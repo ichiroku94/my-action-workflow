@@ -17,4 +17,7 @@ jobs:
         # As GitHub Actions can also run a script, use below syntax to execute a script
         run: echo "Hello world"
       - name: Ichiroku Print Goodbye
-        run: echo "Done - Goodbye"
+        # You can use the pipe to execute multiple command
+        run: |
+          echo "Before Done"
+          echo "Done - Goodbye"
