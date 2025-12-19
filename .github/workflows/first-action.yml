@@ -1,0 +1,20 @@
+# Any naming with ichiroku indicate a non-reserve syntax, meaning could be anything user want
+name: Ichiroku First Workflow
+
+# Here you define when it should be triggered
+on: workflow_dispatch # This is an event that will need to manually triggered by user
+
+# Here you define what the action aka workflow should do
+jobs:
+  ichiroku-first-job:
+    # Here you define which runner to use to run this job
+    # You may check which env available to be used
+    runs-on: ubuntu-latest
+    # Next we define our step
+    steps:
+      # It could be multiple step, thus we are using hyphen to provide a list of steps in yaml
+      - name: Ichiroku Print Greeting
+        # As GitHub Actions can also run a script, use below syntax to execute a script
+        run: echo "Hello world"
+      - name: Ichiroku Print Goodbye
+        run: echo "Done - Goodbye"
