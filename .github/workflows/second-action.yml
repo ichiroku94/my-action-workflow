@@ -1,0 +1,14 @@
+name: Ichiroku Second Actions
+on: push
+jobs:
+  ichiroku-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ichiroku Get Code
+        # Actions is somethign GitHub provided to perform complex step
+        # You may also create your own custom actions, or use the available community's action
+        # We use keyword uses to call for Actions
+        # The Actions below enable runner to access our repository
+        uses: actions/checkout@v3
+        # Some Actions required a parameter to be passed into, and we can use with: syntax to pass it
+        # with:
