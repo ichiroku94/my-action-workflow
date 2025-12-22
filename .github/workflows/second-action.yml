@@ -25,8 +25,30 @@ jobs:
         run: |
           cd app
           npm ci
+    
       - name: Ichiroku Run Node Test
         run: |
           cd app
           npm test
-
+          
+  # We can have multiple jobs in 1 workflow files
+  ichiroku-deploy-second-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ichiroku Get Code
+        uses: actions/checkout@v3
+      - name: Ichiroku Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Ichiroku Install Dependencies
+        run: |
+          cd app
+          npm ci
+      - name: Ichiroku Build Project
+        run: |
+          cd app
+          npm run build
+      # As we dont have deployment server yet, we are not going to really perform deploymeny for now
+      - name: Ichiroku Deploy
+        run: echo "Deploying...."
