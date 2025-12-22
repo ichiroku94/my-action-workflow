@@ -1,0 +1,10 @@
+name: Ichiroku Output Information
+on: workflow_dispatch
+jobs:
+  ichiroku-get-github-context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ichiroku Get Github Context
+        # The wrapper "${{}}" allow to specify varible inside string
+        # The "github" is a reserve keyword to access GitHub metadata
+        run: echo "${{toJSON(github)}}"
