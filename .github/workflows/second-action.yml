@@ -26,5 +26,7 @@ jobs:
           cd app
           npm ci
       - name: Ichiroku Run Node Test
-        run: npm test
+        run: |
+          cd app
+          npm test
 
