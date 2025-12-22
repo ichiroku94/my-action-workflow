@@ -16,7 +16,6 @@ jobs:
         run: |
           cd app2
           npm ci
-          npm init @eslint/config
           npm run lint
           npm test
     
