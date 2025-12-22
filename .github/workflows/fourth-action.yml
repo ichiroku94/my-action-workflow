@@ -15,6 +15,10 @@ jobs:
       - name: Ichiroku Install Dep, Do Test, Lint Check
         run: |
           cd app2
+          echo "========="
+          npm -v
+          echo "========="
+          node -v
           npm ci
           npm run lint
           npm test
