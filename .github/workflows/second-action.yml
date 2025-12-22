@@ -33,6 +33,9 @@ jobs:
           
   # We can have multiple jobs in 1 workflow files
   ichiroku-deploy-second-job:
+    # Without "needs:" syntax, the job will run in parallel
+    # We can pass multiple jobs within needs
+    needs: [ichiroku-test]
     runs-on: ubuntu-latest
     steps:
       - name: Ichiroku Get Code
