@@ -20,7 +20,7 @@ jobs:
         run: |
           cd app2
           npm ci
-          npm test
           npm lint
+          npm test
     
   
