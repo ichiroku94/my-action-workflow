@@ -6,4 +6,21 @@ jobs:
     steps:
       - name: Ichiroku Get Context and print
         run: echo "${{ toJSON(github.event.issue) }}"
-      
+  ichiroku-run-when-issue-raised:
+    needs: [ichiroku-echo-issue-detail]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ichiroku Get Source
+        uses: actions/checkout@v3
+      - name: Ichiroku Install Node
+        uses: action/setup-node@v3
+        with:
+          node-version: 18
+      - name: Ichiroku Install Dep, Do Test, Lint Check
+        run: |
+          cd app2
+          npm ci
+          npm test
+          npm lint
+    
+  
