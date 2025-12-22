@@ -12,3 +12,17 @@ jobs:
         uses: actions/checkout@v3
         # Some Actions required a parameter to be passed into, and we can use with: syntax to pass it
         # with:
+        
+        # As we are using ubuntu, usually it comes with node so we dont have to install
+        # In case your environment not having node.js you may use below Actions
+      - name: Ichiroku Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          
+      # We add a common node command
+      - name: Ichiroku Install Node Dependencies
+        run: npm ci
+      - name: Ichiroku Run Node Test
+        run: npm test
+
