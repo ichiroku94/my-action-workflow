@@ -1,5 +1,9 @@
 name: Ichiroku Second Actions
-on: push
+# push = trigger on something being commited into the repository
+# workflow_dispatch = manual trigger the workflow
+# on: push
+# You can have multiple events to trigger Actions within one Actions as below
+on: [push, workflow_dispatch]
 jobs:
   ichiroku-test:
     runs-on: ubuntu-latest
