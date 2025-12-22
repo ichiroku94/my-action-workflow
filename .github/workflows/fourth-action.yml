@@ -1,0 +1,9 @@
+name: Ichiroku Detect Issue 
+on: issues
+jobs: 
+  ichiroku-echo-issue-detail:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ichiroku Get Context and print
+        run: echo "${{ toJSON(github.event.issue) }}"
+      
