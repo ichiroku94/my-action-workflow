@@ -22,7 +22,9 @@ jobs:
           
       # We add a common node command
       - name: Ichiroku Install Node Dependencies
-        run: npm ci
+        run: |
+          cd app
+          npm ci
       - name: Ichiroku Run Node Test
         run: npm test
 
