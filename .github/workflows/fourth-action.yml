@@ -19,7 +19,13 @@ jobs:
           npm -v
           echo "========="
           node -v
+          echo "========="
+          pwd
+          echo "========="
           npm ci
+          echo "========="
+          pwd
+          echo "========="
           npm run lint
           npm test
     
