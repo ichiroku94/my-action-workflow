@@ -4,11 +4,25 @@ on:
   pull_request:
     # You can defined to only trigger the workflow when certain action of pull_request performed
     # You can pass a list into types like below
+    # This is know as Activity Type
     # types: [opened, assigned]
     types: 
       - opened
+    # pull_request also contains Event Filter
+    branches:
+      - main
   # However, when we want to define a second trigger, we need to define as below eventhough there is no child property underneath. Yes with colon
-  workflow_dispatch:    
+  workflow_dispatch:   
+  push:
+    # For some trigger, instead of Activity Type, we use Event Filter
+    # We can specify to trigger this workflow when we push into below branch
+    branches:
+      - main
+      - 'dev-*' # This indicate any branch with name dev-new, dev-this-is-new
+      - 'feat/**' # This indicate any branch with name feat/new feat/new/new 
+    # Another example of Event Filter for push is paths-ignore where it will ignore any push toward that path
+    paths-ignore:
+      - '.github/workflows/*'
 jobs:
   ichiroku-jobs:
     runs-on: ubuntu-latest
