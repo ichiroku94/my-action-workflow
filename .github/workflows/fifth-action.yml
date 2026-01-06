@@ -11,7 +11,7 @@ on:
   workflow_dispatch:    
 jobs:
   ichiroku-jobs:
-    runs-on: ubuntu latest
+    runs-on: ubuntu-latest
     steps:
       - name: ichiroku-step
         run: echo "${{ toJSON(github) }}"
