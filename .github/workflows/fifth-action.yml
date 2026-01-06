@@ -9,6 +9,7 @@ on:
     types: 
       - opened
     # pull_request also contains Event Filter
+    # A pull_request event can also be triggered by merging from fork branch. However, a first timer PR (only apply for non-collaborators) still need to be approved at the original branch workflow Actions before it can be run
     branches:
       - main
   # However, when we want to define a second trigger, we need to define as below eventhough there is no child property underneath. Yes with colon
