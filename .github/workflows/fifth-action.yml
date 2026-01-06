@@ -1,0 +1,17 @@
+name: Ichiroku Fifth Action
+on: 
+  # A pull_request is called merge request in Gitlab 
+  pull_request:
+    # You can defined to only trigger the workflow when certain action of pull_request performed
+    # You can pass a list into types like below
+    # types: [opened, assigned]
+    types: 
+      - opened
+  # However, when we want to define a second trigger, we need to define as below eventhough there is no child property underneath. Yes with colon
+  workflow_dispatch:    
+jobs:
+  ichiroku-jobs:
+    runs-on: ubuntu latest
+    steps:
+      - name: ichiroku-step
+        run: echo "${{ toJSON(github) }}"
