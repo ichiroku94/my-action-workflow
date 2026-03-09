@@ -39,7 +39,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dist-files
-          path: ./
+          # it seem the default working directory set above does not affect the actions
+          # thus, we need to specify from the parent path
+          path: app3/dist
   deploy:
     needs: build
     runs-on: ubuntu-latest
