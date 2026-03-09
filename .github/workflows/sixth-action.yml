@@ -1,0 +1,22 @@
+name: Ichiroku Sixth Action
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    # define the directory path explicitly
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - name: Ichiroku get code
+        uses: actions/checkout@v3
+      - name: Ichiroku install dependencies
+        run: npm ci
+      - name: Ichiroku lint code
+        run: npm run lint
+      - name: Ichiroku test code
+        run: npm test code
