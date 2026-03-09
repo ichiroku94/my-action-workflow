@@ -34,7 +34,7 @@ jobs:
       - name: Ichiroku build website
         run: npm run build
       - name: Ichiroku upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dist-files
           path: dist
