@@ -10,7 +10,7 @@ jobs:
     # define the directory path explicitly
     defaults:
       run:
-        working-directory: app
+        working-directory: app2
     steps:
       - name: Ichiroku get code
         uses: actions/checkout@v3
