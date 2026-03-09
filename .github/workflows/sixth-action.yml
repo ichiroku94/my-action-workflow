@@ -49,6 +49,11 @@ jobs:
     #   run:
     #     working-directory: app3
     steps:
-      
+      - name: Ichiroku get artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-files
+      - name: Ichiroku see artiface
+        run: ls -a
       - name: Ichiroku deploy
         run: echo "Deploying..."
