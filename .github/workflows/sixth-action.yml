@@ -19,4 +19,26 @@ jobs:
       - name: Ichiroku lint code
         run: npm run lint
       - name: Ichiroku test code
-        run: npm test code
+        run: npm run test
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app3
+    steps:
+      - name: Ichiroku get code
+        uses: actions/checkout@v3
+      - name: Ichiroku install dependencies
+        run: npm ci
+      - name: Ichiroku build website
+        run: npm run build
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app3
+    steps:
+      - name: Ichiroku deploy
+        run: echo "Deploying..."
