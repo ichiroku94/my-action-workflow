@@ -14,6 +14,22 @@ jobs:
     steps:
       - name: Ichiroku get code
         uses: actions/checkout@v3
+      
+      # installing dependency is taking quite longer
+      # it would be nice if we cache the dependency and use it in the subsequence job(in this case build)
+      # to cache dependcy perform in below step, we need to perform this step beforehand
+      - name: ichiroku caching dependecy
+        uses: actions/cache@v3
+        with:
+          # rather than action behavior, this path is npm behavior
+          # npm store the cache inside here
+          # it will look for this folder to get the tarball, if not exist, then it downloads from repo
+          path: ~/.npm
+          # we need to specify the key for our cache, which later can be used in next step
+          # the reason for performing hashing is to provide unique key
+          # when the dep is updated, a new key should be used as the old one will no longer valid
+          # the cache action won't overwrite it if it found the cache key, so the updated dep won't be overwrite causing unupdated dependency issue
+          key: deps-node-modules-${{hashFiles('**/package-lock.json')}} 
       - name: Ichiroku install dependencies
         run: npm ci
       - name: Ichiroku lint code
@@ -31,6 +47,14 @@ jobs:
     steps:
       - name: Ichiroku get code
         uses: actions/checkout@v3
+        
+      # we still need to call the action in the consumption as well, as the caching doesn't instruct the next job to use it, but rather make it available globally
+      - name: ichiroku caching dependecy
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: deps-node-modules-${{hashFiles('**/package-lock.json')}} 
+      
       - name: Ichiroku install dependencies
         run: npm ci
       - name: Ichiroku build website
@@ -70,6 +94,7 @@ jobs:
           name: dist-files
       - name: Ichiroku see artifact
         run: ls -a
+        
       # let say, we want to access the outputs result of previous job
       - name: Ichiroku get build output file
         # here how we retrieve the output variable of previous job
