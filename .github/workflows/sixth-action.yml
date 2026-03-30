@@ -26,6 +26,8 @@ jobs:
     defaults:
       run:
         working-directory: app3
+    outputs:
+      script-file: ${{steps.ichiroku_publish_id.outputs.ichiroku_var}}
     steps:
       - name: Ichiroku get code
         uses: actions/checkout@v3
@@ -33,6 +35,16 @@ jobs:
         run: npm ci
       - name: Ichiroku build website
         run: npm run build
+        
+      # let say, we want to get the name of js file builded and pass it to next job(in this case deploy)
+      - name: Ichiroku publish JS file name
+        # this id will be used in above outputs block
+        id: ichiroku_publish_id
+        # below command will get the js file generated within dist/assests folder
+        # as the generated JS file name is random, we are using wildcard
+        # this step will generate outputs with variable ichiroku_var, where allowing outputs block above to access it
+        run: find dist/assets/*.js -type f execdir echo 'ichiroku_var={}' >> $GITHUB_OUTPUT ';'
+      
       - name: Ichiroku show list of files/folders
         run: ls -a
       - name: Ichiroku upload artifact
@@ -42,9 +54,12 @@ jobs:
           # it seem the default working directory set above does not affect the actions
           # thus, we need to specify from the parent path
           path: app3/dist
+        
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    # to download from previous upload folder, we don't need to change the default directory
+    # it seem the artifact will be search by the name specified in previous step
     # defaults:
     #   run:
     #     working-directory: app3
@@ -53,7 +68,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dist-files
-      - name: Ichiroku see artiface
+      - name: Ichiroku see artifact
         run: ls -a
+      # let say, we want to access the outputs result of previous job
+      - name: Ichiroku get build output file
+        # here how we retrieve the output variable of previous job
+        run: echo "${{ needs.build.outputs.script-file }}"
+      
       - name: Ichiroku deploy
         run: echo "Deploying..."
