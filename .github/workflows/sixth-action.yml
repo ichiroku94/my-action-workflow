@@ -43,7 +43,7 @@ jobs:
         # below command will get the js file generated within dist/assests folder
         # as the generated JS file name is random, we are using wildcard
         # this step will generate outputs with variable ichiroku_var, where allowing outputs block above to access it
-        run: find dist/assets/*.js -type f execdir echo 'ichiroku_var={}' >> $GITHUB_OUTPUT ';'
+        run: find dist/assets/*.js -type f -execdir echo 'ichiroku_var={}' >> $GITHUB_OUTPUT ';'
       
       - name: Ichiroku show list of files/folders
         run: ls -a
