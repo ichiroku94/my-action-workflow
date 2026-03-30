@@ -48,7 +48,7 @@ jobs:
       - name: Ichiroku get code
         uses: actions/checkout@v3
         
-      # we still need to call the action in the consumption as well, as the caching doesn't instruct the next job to use it, but rather make it available globally
+      # we still need to call the action in the consumption as well, as the caching doesn't instruct the next job to use it, but rather make it available across machine
       - name: ichiroku caching dependecy
         uses: actions/cache@v3
         with:
