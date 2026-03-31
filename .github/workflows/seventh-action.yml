@@ -1,13 +1,26 @@
-name: Deployment
+name: Ichiroku Seventh Action
 on:
   push:
     branches:
       - main
       - dev
+env:
+  # you may set the environment variable within the workflow as follow
+  # this variable will be available for all job within this workflow
+  MONGODB_DB_NAME: ichiroku-db
 jobs:
   test:
+    # you can also define the environment for specific job scope as follow
+    env:
+      MONGODB_CLUSTER_ADDRESS: ichiroku-cluster.uldhzf0.mongodb.net
+      MONGODB_USERNAME: ichiroku
+      MONGODB_PASSWORD: ZAQ!2wsx
+      PORT: 8080
     environment: testing
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app4
     steps:
       - name: Get Code
         uses: actions/checkout@v3
@@ -19,15 +32,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run server
-        run: npm start & npx wait-on http://127.0.0.1:XYZ
+      
+        # the $PORT is a linux way of retrieving env variable
+        # which is the value we set within this workflow
+        run: npm start & npx wait-on http://127.0.0.1:$PORT
+        
       - name: Run tests
         run: npm test
       - name: Output information
-        run: echo "..."
+        run: echo "MONGOBD_USERNAME = ${{ env.MONGODB_USERNAME }} ; MONGODB_PASSWORD = $MONGODB_PASSWORD"
   deploy:
     needs: test
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app4
     steps:
       - name: Output information
-        run: |        
-          echo "..."
+        run: |
+          echo "MONGOBD_USERNAME = ${{ env.MONGODB_USERNAME }} ; MONGODB_PASSWORD = $MONGODB_PASSWORD"
+          echo "MONGODB_DB_NAME = $MONGODB_DB_NAME"
