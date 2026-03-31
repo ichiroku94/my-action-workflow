@@ -13,8 +13,10 @@ jobs:
     # you can also define the environment for specific job scope as follow
     env:
       MONGODB_CLUSTER_ADDRESS: ichiroku-cluster.uldhzf0.mongodb.net
-      MONGODB_USERNAME: ichiroku
-      MONGODB_PASSWORD: ZAQ!2wsx
+      # we are storing our username and password within repository secret
+      # below is how we accessing it
+      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
       PORT: 8080
     environment: testing
     runs-on: ubuntu-latest
