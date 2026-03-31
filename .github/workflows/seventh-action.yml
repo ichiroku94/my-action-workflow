@@ -44,9 +44,9 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: app4
+    # defaults:
+    #   run:
+    #     working-directory: app4
     steps:
       - name: Output information
         run: |
