@@ -98,5 +98,5 @@ jobs:
       - name: Ichiroku Output Failure Context
         run: |
           echo "Something went wrong"
-          echo "${{ github }}"
+          echo "${{ toJson(github) }}"
     
