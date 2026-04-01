@@ -1,4 +1,4 @@
-name: Website Deployment
+name: Ichiroku Eigth Action
 on:
   push:
     branches:
@@ -41,10 +41,10 @@ jobs:
       - name: Test code
         run: npm run test
       - name: Upload test report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-report
-          path: test.json
+          path: app5/test.json
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -69,7 +69,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dist-files
-          path: app4/dist
+          path: app5/dist
   deploy:
     needs: build
     runs-on: ubuntu-latest
