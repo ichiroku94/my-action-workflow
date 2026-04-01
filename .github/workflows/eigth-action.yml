@@ -88,3 +88,13 @@ jobs:
         run: ls
       - name: Deploy
         run: echo "Deploying..."
+  # let say we want this jobs to run whenever there is failure job
+  report:
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ichiroku Output Failure Context
+        run: |
+          echo "Something went wrong"
+          echo "${{ github }}"
+    
