@@ -90,6 +90,8 @@ jobs:
         run: echo "Deploying..."
   # let say we want this jobs to run whenever there is failure job
   report:
+    # just by specifying below two jobs, it will still detect if failure happened in job not being specified here
+    needs: [lint, deploy]
     if: failure()
     runs-on: ubuntu-latest
     steps:
