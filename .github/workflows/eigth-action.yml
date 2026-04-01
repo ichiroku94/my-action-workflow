@@ -39,8 +39,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Test code
+        # we assign id so we can refer from other step
+        id: ichiroku-test-step
         run: npm run test
       - name: Upload test report
+        # let say previous step will fail, and we want to make sure below only run when previous step fail
+        # the value after steps is the id we define in previous step
+        # without failure() function, below will not trigger as previous step failure will cause next step to stop
+        if: failure() && steps.ichiroku-test-step.outcome == 'failure'
         uses: actions/upload-artifact@v4
         with:
           name: test-report
